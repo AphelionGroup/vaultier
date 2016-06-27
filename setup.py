@@ -6,7 +6,7 @@ setup(
     install_requires=[
         'BeautifulSoup==3.2.1',
         'Django==1.6',
-        'South==0.8.4',
+        'South==1.0.2',
         'argparse==1.2.1',
         'cssutils==1.0',
         'django-appconf==0.6',
@@ -19,7 +19,7 @@ setup(
         'psycopg2==2.5.1',
         'pycrypto==2.6.1',
         'pynliner==0.5.0',
-        'six==1.4.1',
+        'six==1.10',
         'wsgiref==0.1.2',
         'raven==5.0.0',
         'pytz==2014.7',
