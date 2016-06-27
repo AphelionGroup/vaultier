@@ -229,26 +229,53 @@ Vaultier.EncryptedModel.decryptedField = function (encryptedField, decryptedFiel
 }
 
 Vaultier.EncryptedModel.generatePassword = function() {
-    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-    var string_length = 16;
-    var randomstring = '';
-    var charCount = 0;
-    var numCount = 0;
 
-    for (var i = 0; i < string_length; i++) {
-        // If random bit is 0, there are less than 3 digits already saved, and there are not already 5 characters saved, generate a numeric value.
-        if ((Math.floor(Math.random() * 2) == 0) && numCount < 3 || charCount >= 5) {
-            var rnum = Math.floor(Math.random() * 10);
-            randomstring += rnum;
-            numCount += 1;
+    var specials = '!@#$%^&*()_+{}:"<>?\|[];\',./`~';
+    var lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var numbers = '0123456789';
+
+    var all = specials + lowercase + uppercase + numbers;
+
+    String.prototype.pick = function(min, max) {
+        var n, chars = '';
+
+        if (typeof max === 'undefined') {
+            n = min;
         } else {
-            // If any of the above criteria fail, go ahead and generate an alpha character from the chars string
-            var rnum2 = Math.floor(Math.random() * chars.length);
-            randomstring += chars.substring(rnum2, rnum2 + 1);
-            charCount += 1;
+            n = min + Math.floor(Math.random() * (max - min));
         }
-    }
-    return randomstring;
+
+        for (var i = 0; i < n; i++) {
+            chars += this.charAt(Math.floor(Math.random() * this.length));
+        }
+
+        return chars;
+    };
+
+    String.prototype.shuffle = function() {
+        var array = this.split('');
+        var tmp, current, top = array.length;
+
+        if (top) while (--top) {
+            current = Math.floor(Math.random() * (top + 1));
+            tmp = array[current];
+            array[current] = array[top];
+            array[top] = tmp;
+        }
+
+        return array.join('');
+    };
+
+    var password = '';
+    password += specials.pick(2);
+    password += lowercase.pick(2);
+    password += uppercase.pick(2);
+    password += numbers.pick(2);
+    password += all.pick(42);
+    password = password.shuffle();
+
+    return password;
 }
 
 
