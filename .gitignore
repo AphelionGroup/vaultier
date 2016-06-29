@@ -46,3 +46,4 @@ Vaultier.egg-info
 
 # ignore builded doc
 docs/_build
+/env/
