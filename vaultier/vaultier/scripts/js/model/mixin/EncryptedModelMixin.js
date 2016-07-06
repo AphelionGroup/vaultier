@@ -230,7 +230,7 @@ Vaultier.EncryptedModel.decryptedField = function (encryptedField, decryptedFiel
 
 Vaultier.EncryptedModel.generatePassword = function() {
 
-    var specials = '!@#$%^&*()_+{}:"<>?\|[];\',./`~';
+    var specials = '!@#$%^*_+{}:?[];,./~';
     var lowercase = 'abcdefghijklmnopqrstuvwxyz';
     var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var numbers = '0123456789';
@@ -277,5 +277,4 @@ Vaultier.EncryptedModel.generatePassword = function() {
 
     return password;
 }
-
 
